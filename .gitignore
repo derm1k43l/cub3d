@@ -1,0 +1,18 @@
+obj/
+.vscode
+philo.dSYM
+.DS_Store
+Dockerfile
+
+# Object files
+*/obj/*
+obj/*
+*.o
+*.ko
+*.obj
+*.elf
+
+# Linker output
+*.ilk
+*.map
+*.exp
