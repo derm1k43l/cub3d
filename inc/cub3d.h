@@ -6,7 +6,7 @@
 /*   By: mrusu <mrusu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 16:11:10 by mrusu             #+#    #+#             */
-/*   Updated: 2024/09/27 16:21:46 by mrusu            ###   ########.fr       */
+/*   Updated: 2024/10/01 10:59:22 by mrusu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,35 @@
 # include <limits.h>
 # include <stdbool.h>
 # include <errno.h>
+# include <fcntl.h>
+
+// Extra
+# include "../libft/inc/libft.h"
+# include "../mlx42/include/MLX42/MLX42.h"
 
 // Typdef
+typedef struct s_map
+{
+	void	*init;
+	void	*win;
+	int		res_x;
+	int		res_y;
+	char	*north_tx;
+	char	*south_tx;
+	char	*west_tx;
+	char	*east_tx;
+	int		floor_color; //maybe tetxure?
+	int		ceiling_color;
+	char 	**map_data; // 2D array
+}	t_map;
+
+typedef struct s_player
+{
+	double	x;
+	double	y;
+	double	dir;
+	double	plane;
+}	t_player;
 
 // Forward declaration of structs
 

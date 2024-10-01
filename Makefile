@@ -18,7 +18,7 @@ MLX_FLAGS = ./MLX42/build/libmlx42.a -Iinclude -lglfw -framework Cocoa -framewor
 MLX_INC = -I$(MLX_DIR)
 
 # LIST OF SOURCE FILES
-SRCS = $(SRC_DIR)/main.c 
+SRCS = $(SRC_DIR)/main.c
 OBJS = $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(SRCS))
 
 # COLORS
@@ -63,5 +63,9 @@ fclean: clean
 	@echo "$(GREEN)FdF fcleaned$(NC)"
 
 re: fclean all
+
+ree: 
+	@rm -rf $(OBJ_DIR) $(NAME)
+	@echo "$(GREEN)FdF ree/ just obj from cub3d wihtou mlf for speeed tests $(NC)"
 
 .PHONY: all clean fclean re
