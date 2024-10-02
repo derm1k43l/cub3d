@@ -1,28 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse.c                                            :+:      :+:    :+:   */
+/*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mrusu <mrusu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/30 16:36:52 by mrusu             #+#    #+#             */
-/*   Updated: 2024/10/02 16:12:44 by mrusu            ###   ########.fr       */
+/*   Created: 2024/10/02 16:01:27 by mrusu             #+#    #+#             */
+/*   Updated: 2024/10/02 16:08:25 by mrusu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
 
-int	open_file(char *file_name)
+void	init_default(t_map *map)
 {
-	int	fd;
-
-	fd = open(file_name, O_RDONLY);
-	if (fd == -1)
-	{
-		printerr("Error\nFail to open file : \n");
-		printerr(file_name);
-		printerr("\n");
-		exit(1);
-	}
-	return (fd);
+	map->init = NULL;
+	map->win = NULL;
+	map->res_x = RES_X;
+	map->res_y = RES_Y;
+	map->north_tx = ft_strdup(DEFAULT_TEXTURE);
+	map->south_tx = ft_strdup(DEFAULT_TEXTURE);
+	map->west_tx = ft_strdup(DEFAULT_TEXTURE);
+	map->east_tx = ft_strdup(DEFAULT_TEXTURE);
+	map->floor_color = DEFAULT_COLOR;
+	map->ceiling_color = DEFAULT_COLOR;
+	map->map_data = NULL;
+	map->height = 0;
 }

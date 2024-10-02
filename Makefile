@@ -1,6 +1,6 @@
 # COMPILER
 CC = cc
-FLAGS = -Wall -Wextra -Werror -Ofast -Wunreachable-code #-fsanitize=address
+FLAGS = -Wall -Wextra -Werror -Ofast -Wunreachable-code -g #-fsanitize=address
 
 SRC_DIR = srcs
 INC_DIR = inc
@@ -18,7 +18,7 @@ MLX_FLAGS = ./MLX42/build/libmlx42.a -Iinclude -lglfw -framework Cocoa -framewor
 MLX_INC = -I$(MLX_DIR)
 
 # LIST OF SOURCE FILES
-SRCS = $(SRC_DIR)/main.c
+SRCS = $(SRC_DIR)/main.c $(SRC_DIR)/utils.c $(SRC_DIR)/init.c $(SRC_DIR)/parse.c
 OBJS = $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(SRCS))
 
 # COLORS

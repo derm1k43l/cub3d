@@ -11,6 +11,7 @@ obj/*
 *.ko
 *.obj
 *.elf
+cub3d.dSYM/
 
 # Linker output
 *.ilk
