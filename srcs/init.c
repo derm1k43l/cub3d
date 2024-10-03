@@ -6,7 +6,7 @@
 /*   By: mrusu <mrusu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 16:01:27 by mrusu             #+#    #+#             */
-/*   Updated: 2024/10/02 16:08:25 by mrusu            ###   ########.fr       */
+/*   Updated: 2024/10/03 18:23:19 by mrusu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ void	init_default(t_map *map)
 	map->south_tx = ft_strdup(DEFAULT_TEXTURE);
 	map->west_tx = ft_strdup(DEFAULT_TEXTURE);
 	map->east_tx = ft_strdup(DEFAULT_TEXTURE);
-	map->floor_color = DEFAULT_COLOR;
-	map->ceiling_color = DEFAULT_COLOR;
+	map->floor_color = DEFAULT_FLOOR;
+	map->ceiling_color = DEFAULT_CEILING;
 	map->map_data = NULL;
 	map->height = 0;
 }

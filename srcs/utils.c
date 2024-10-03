@@ -6,7 +6,7 @@
 /*   By: mrusu <mrusu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 16:02:44 by mrusu             #+#    #+#             */
-/*   Updated: 2024/10/02 16:49:10 by mrusu            ###   ########.fr       */
+/*   Updated: 2024/10/03 15:52:34 by mrusu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,17 +43,17 @@ void	printerr(char *msg)
 	write(2, msg, ft_strlen(msg));
 }
 
-int ft_is_whitespace(char c)
+int	ft_is_whitespace(char c)
 {
-    return (c == ' ' || c == '\t' || c == '\n' \
+	return (c == ' ' || c == '\t' || c == '\n' \
 		|| c == '\r' || c == '\f' || c == '\v');
 }
 
-char *ft_strtrim1(const char *s)
+char	*ft_strtrim1(const char *s)
 {
-	size_t  start;
-	size_t  end;
-	char    *str;
+	size_t	start;
+	size_t	end;
+	char	*str;
 
 	start = 0;
 	end = ft_strlen(s);

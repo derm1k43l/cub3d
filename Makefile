@@ -18,7 +18,9 @@ MLX_FLAGS = ./MLX42/build/libmlx42.a -Iinclude -lglfw -framework Cocoa -framewor
 MLX_INC = -I$(MLX_DIR)
 
 # LIST OF SOURCE FILES
-SRCS = $(SRC_DIR)/main.c $(SRC_DIR)/utils.c $(SRC_DIR)/init.c $(SRC_DIR)/parse.c
+SRCS = $(SRC_DIR)/main.c $(SRC_DIR)/utils.c $(SRC_DIR)/init.c $(SRC_DIR)/parse.c \
+	$(SRC_DIR)/parse_utils.c $(SRC_DIR)/map.c 
+
 OBJS = $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(SRCS))
 
 # COLORS
