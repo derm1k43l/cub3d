@@ -6,19 +6,16 @@
 /*   By: mrusu <mrusu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 16:36:52 by mrusu             #+#    #+#             */
-/*   Updated: 2024/10/03 18:14:47 by mrusu            ###   ########.fr       */
+/*   Updated: 2024/10/04 17:59:48 by mrusu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
 
-int	parse_texture_and_color(int fd, t_map *map)
+char	*parse_texture_and_color(int fd, t_map *map)
 {
 	char	*line;
-	int		parse_done;
 
-
-	parse_done = 0;
 	while (42)
 	{
 		line = skip_empty_line(fd);
@@ -27,18 +24,13 @@ int	parse_texture_and_color(int fd, t_map *map)
 		if (parse_texture(line, map) != 0 && parse_color(line, map) != 0)
 		{
 			if (line[0] == '1' || line[0] == ' ')
-				parse_done = 1;
+				return (line);
 			else
-				return (free(line), ft_printf("Error\nInvalid line: %s\n", line), 1);
+				return (free(line), ft_printf("Error\nInvalid line: %s\n", line), NULL);
 		}
-		if (parse_done)
-			break ;
 		free(line);
 	}
-	if (parse_done == 0)
-		return (ft_printf("Error\nMissing map data.\n"), 1);
-	else
-		return (0);
+	return (ft_printf("Error\nNo map data found.\n"), NULL);
 }
 
 int	parse_texture(char *line, t_map *map)
@@ -83,31 +75,26 @@ int	parse_color(char *line, t_map *map)
 		return (1);
 }
 
-int	parse_map(int fd, t_map *map)
+int	parse_map(int fd, t_map *map, char *first_map_line)
 {
 	char	*line;
 
-	while (42)
+	process_map_line(map, first_map_line);
+	free(first_map_line);
+	while (1)
 	{
 		line = get_next_line(fd);
 		if (!line)
 			break ;
-		if (line[0] == '1' || line[0] == ' ')
-			break ;
-		free(line);
-	}
-	while (42)
-	{
 		process_map_line(map, line);
 		free(line);
-		line = get_next_line(fd);
-		if (line == NULL)
-			break ;
 	}
+	if (map->height == 0)
+		return (ft_printf("Error\nNo map data found.\n"), 1);
 	return (0);
 }
 
-int parse_color_value(char *line, t_color *color)
+int	parse_color_value(char *line, t_color *color)
 {
     int r, g, b;
 

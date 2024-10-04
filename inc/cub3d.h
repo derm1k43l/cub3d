@@ -6,7 +6,7 @@
 /*   By: mrusu <mrusu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 16:11:10 by mrusu             #+#    #+#             */
-/*   Updated: 2024/10/03 18:24:30 by mrusu            ###   ########.fr       */
+/*   Updated: 2024/10/04 11:05:18 by mrusu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,18 +90,17 @@ void	process_map_line(t_map *map, char *line);
 void	clean_map(t_map *map);
 void	printerr(char *msg);
 int		ft_is_whitespace(char c);
-char	*ft_strtrim1(const char *s);
 void	print_map_data(t_map *map);
 
 // init.c
 void	init_default(t_map *map);
 
 // parse.c
-int		parse_texture_and_color(int fd, t_map *map);
+char	*parse_texture_and_color(int fd, t_map *map);
 int		parse_texture(char *line, t_map *map);
 int		parse_color(char *line, t_map *map);
 int		parse_color_value(char *line, t_color *color);
-int		parse_map(int fd, t_map *map);
+int		parse_map(int fd, t_map *map, char *first_map_line);
 
 // parse_utils.c
 int		open_file(char *file_name);

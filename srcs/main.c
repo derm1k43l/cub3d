@@ -6,7 +6,7 @@
 /*   By: mrusu <mrusu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 16:10:15 by mrusu             #+#    #+#             */
-/*   Updated: 2024/10/03 18:17:42 by mrusu            ###   ########.fr       */
+/*   Updated: 2024/10/04 15:32:09 by mrusu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,11 @@ void	init_mlx(t_map *map)
 		return (ft_printf("Error\nFail to create window"), exit(1));
 }
 
+void leaks()
+{
+	system("leaks cub3d");
+}
+
 int	main(int ac, char **av)
 {
 	t_map	*map;
@@ -33,6 +38,7 @@ int	main(int ac, char **av)
 		return (ft_printf("Error\n Problem wiht memory for map."), 1);
 	init_default(map);
 	read_map(av[1], map);
+	// atexit(leaks);
 	// init_mlx(map);
 	// mlx image to window
 	return (0);

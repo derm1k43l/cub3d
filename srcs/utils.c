@@ -6,7 +6,7 @@
 /*   By: mrusu <mrusu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 16:02:44 by mrusu             #+#    #+#             */
-/*   Updated: 2024/10/03 15:52:34 by mrusu            ###   ########.fr       */
+/*   Updated: 2024/10/04 10:58:22 by mrusu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,22 +47,6 @@ int	ft_is_whitespace(char c)
 {
 	return (c == ' ' || c == '\t' || c == '\n' \
 		|| c == '\r' || c == '\f' || c == '\v');
-}
-
-char	*ft_strtrim1(const char *s)
-{
-	size_t	start;
-	size_t	end;
-	char	*str;
-
-	start = 0;
-	end = ft_strlen(s);
-	while (ft_is_whitespace(s[start]))
-		start++;
-	while (end > start && ft_is_whitespace(s[end - 1]))
-		end--;
-	str = ft_substr(s, start, end - start);
-	return (str);
 }
 
 //debug
