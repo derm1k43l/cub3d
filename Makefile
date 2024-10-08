@@ -6,7 +6,7 @@ SRC_DIR = srcs
 INC_DIR = inc
 OBJ_DIR = obj
 
-NAME = cub3d
+NAME = cub3D
 
 # LIBRARY NAME
 LIBFT = libft.a
@@ -19,7 +19,7 @@ MLX_INC = -I$(MLX_DIR)
 
 # LIST OF SOURCE FILES
 SRCS = $(SRC_DIR)/main.c $(SRC_DIR)/utils.c $(SRC_DIR)/init.c $(SRC_DIR)/parse.c \
-	$(SRC_DIR)/parse_utils.c $(SRC_DIR)/map.c 
+	$(SRC_DIR)/parse_utils.c $(SRC_DIR)/map.c $(SRC_DIR)/execution.c
 
 OBJS = $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(SRCS))
 
@@ -66,7 +66,7 @@ fclean: clean
 
 re: fclean all
 
-ree: 
+ree:
 	@rm -rf $(OBJ_DIR) $(NAME)
 	@echo "$(GREEN)FdF ree/ just obj from cub3d wihtou mlf for speeed tests $(NC)"
 

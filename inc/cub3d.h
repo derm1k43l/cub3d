@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3D.h                                            :+:      :+:    :+:   */
+/*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mrusu <mrusu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 16:11:10 by mrusu             #+#    #+#             */
-/*   Updated: 2024/10/04 11:05:18 by mrusu            ###   ########.fr       */
+/*   Updated: 2024/10/08 10:59:16 by mrusu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,11 @@
 # define DEFAULT_TEXTURE "default.xpm"
 # define DEFAULT_FLOOR (t_color){0, 0, 0}
 # define DEFAULT_CEILING (t_color){0, 0, 0}
+
+# define ROTATION_SPEED 0.045 // rotation speed
+# define PLAYER_SPEED 4 // player speed
+# define TILE_SIZE 30 // tile size
+
 
 // Typdef foreward declaration
 typedef struct s_map	t_map;
@@ -69,11 +74,30 @@ typedef struct s_map
 
 typedef struct s_player
 {
-	double	x;
-	double	y;
-	double	dir;
-	double	plane;
+	int		plyr_x;
+	int		plyr_y;
+	double	angle; // player angle
+	float	fov_rd; // field of view in radians
+	int 	rot; // rotation flag
+	int		l_r; // left right flag
+	int 	u_d; // up down flag
 }	t_player;
+
+typedef struct s_ray //the ray structure
+{
+	double	ray_ngl; // ray angle
+	double	distance; // distance to the wall
+	int 	flag;  // flag for the wall
+}	t_ray;
+
+typedef struct s_mlx //the mlx structure
+{
+	mlx_image_t	*img; // the image
+	mlx_t		*mlx_p; // the mlx pointer
+	t_ray		*ray; // the ray structure
+	t_map		*dt; // the map data structure
+	t_player	*ply; // the player structure
+}	t_mlx;
 
 // **********************====FUNCTION DECLARATION====*********************
 
@@ -81,10 +105,9 @@ typedef struct s_player
 
 // map.c
 void	read_map(char *file_name, t_map *map);
-int		check_map_struct(char **map_data, int height, int width);
 int		check_map_validity(t_map *map);
-void	process_valid_line(t_map *map, char *line);
-void	process_map_line(t_map *map, char *line);
+int		check_boundary(char **map_data, int height, int width);
+int		check_player(char **map_data, int height, int width);
 
 // utils.c
 void	clean_map(t_map *map);
@@ -105,6 +128,9 @@ int		parse_map(int fd, t_map *map, char *first_map_line);
 // parse_utils.c
 int		open_file(char *file_name);
 char	*skip_empty_line(int fd);
+void	store_map_line(t_map *map, char *line);
 void	memory_allocation(t_map *map);
+
+// execution
 
 #endif

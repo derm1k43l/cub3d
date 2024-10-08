@@ -6,7 +6,7 @@
 /*   By: mrusu <mrusu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 16:36:52 by mrusu             #+#    #+#             */
-/*   Updated: 2024/10/04 17:59:48 by mrusu            ###   ########.fr       */
+/*   Updated: 2024/10/08 13:44:57 by mrusu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ char	*parse_texture_and_color(int fd, t_map *map)
 			if (line[0] == '1' || line[0] == ' ')
 				return (line);
 			else
-				return (free(line), ft_printf("Error\nInvalid line: %s\n", line), NULL);
+				return (free(line), ft_printf("Error\nInvalid line."), NULL);
 		}
 		free(line);
 	}
@@ -79,18 +79,28 @@ int	parse_map(int fd, t_map *map, char *first_map_line)
 {
 	char	*line;
 
-	process_map_line(map, first_map_line);
+	map->map_data[map->height] = malloc((MAX_WIDTH + 1) * sizeof(char));
+	if (!map->map_data[map->height])
+		return (ft_printf("Error\nFail to allocate memory for map data.\n"), 1);
+	ft_printf("Processing line: %s\n", first_map_line); //debug for first line
+	store_map_line(map, first_map_line);
+	map->height++;
 	free(first_map_line);
-	while (1)
+	while (42)
 	{
 		line = get_next_line(fd);
 		if (!line)
 			break ;
-		process_map_line(map, line);
+		if (map->height >= MAX_HEIGHT)
+			return (ft_printf("Error: Map height exceeds max height.\n"), 1);
+		map->map_data[map->height] = malloc((MAX_WIDTH + 1) * sizeof(char));
+		if (!map->map_data[map->height])
+			return (ft_printf("Error\nFail to allocate memory.\n"), 1);
+		ft_printf("Processing line: %s\n", line); //debug
+		store_map_line(map, line);
 		free(line);
+		map->height++;
 	}
-	if (map->height == 0)
-		return (ft_printf("Error\nNo map data found.\n"), 1);
 	return (0);
 }
 

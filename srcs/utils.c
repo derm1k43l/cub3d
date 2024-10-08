@@ -6,7 +6,7 @@
 /*   By: mrusu <mrusu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 16:02:44 by mrusu             #+#    #+#             */
-/*   Updated: 2024/10/04 10:58:22 by mrusu            ###   ########.fr       */
+/*   Updated: 2024/10/08 13:43:55 by mrusu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,9 @@ void	clean_map(t_map *map)
 
 void	printerr(char *msg)
 {
-	write(2, "\033[1;31mError\n\033[0m%s\n", 18);
+	write(2, "\033[1;31mError\n\033[0m", 17);
 	write(2, msg, ft_strlen(msg));
+	write(2, "\n", 1);
 }
 
 int	ft_is_whitespace(char c)
