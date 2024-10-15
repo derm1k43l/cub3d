@@ -6,7 +6,7 @@
 /*   By: mrusu <mrusu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 16:01:27 by mrusu             #+#    #+#             */
-/*   Updated: 2024/10/03 18:23:19 by mrusu            ###   ########.fr       */
+/*   Updated: 2024/10/14 15:25:23 by mrusu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,15 @@ void	init_default(t_map *map)
 	map->win = NULL;
 	map->res_x = RES_X;
 	map->res_y = RES_Y;
-	map->north_tx = ft_strdup(DEFAULT_TEXTURE);
-	map->south_tx = ft_strdup(DEFAULT_TEXTURE);
-	map->west_tx = ft_strdup(DEFAULT_TEXTURE);
-	map->east_tx = ft_strdup(DEFAULT_TEXTURE);
-	map->floor_color = DEFAULT_FLOOR;
-	map->ceiling_color = DEFAULT_CEILING;
+	map->north_tx = ft_strdup("default.xpm");
+	map->south_tx = ft_strdup("default.xpm");
+	map->west_tx = ft_strdup("default.xpm");
+	map->east_tx = ft_strdup("default.xpm");
+	map->floor_color = COLOR_UNSET;
+	map->ceiling_color = COLOR_UNSET;
 	map->map_data = NULL;
 	map->height = 0;
+	map->player_x = -1;
+	map->player_y = -1;
+	map->p = '0';
 }

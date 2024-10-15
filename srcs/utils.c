@@ -6,7 +6,7 @@
 /*   By: mrusu <mrusu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 16:02:44 by mrusu             #+#    #+#             */
-/*   Updated: 2024/10/08 13:43:55 by mrusu            ###   ########.fr       */
+/*   Updated: 2024/10/14 17:56:12 by mrusu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,24 +17,25 @@ void	clean_map(t_map *map)
 	int	i;
 
 	i = 0;
-	if (map->map_data)
+	if (map)
 	{
-		while (map->map_data[i])
+		if (map->map_data)
 		{
-			free(map->map_data[i]);
-			i++;
+			while (i < MAX_HEIGHT)
+			{
+				if (map->map_data[i])
+				{
+					free(map->map_data[i]);
+					printf("Freed row %d\n", i);
+					map->map_data[i] = NULL;
+				}
+				i++;
+			}
+			free(map->map_data);
+			map->map_data = NULL;
+			ft_printf("Freed map_data array.\n"); //debug
 		}
-		free(map->map_data);
 	}
-	if (map->north_tx)
-		free(map->north_tx);
-	if (map->south_tx)
-		free(map->south_tx);
-	if (map->west_tx)
-		free(map->west_tx);
-	if (map->east_tx)
-		free(map->east_tx);
-	free(map);
 }
 
 void	printerr(char *msg)
@@ -56,18 +57,20 @@ void	print_map_data(t_map *map)
 	int	i;
 
 	i = 0;
-	ft_printf("Printing map data:\n");
-	ft_printf("res_x: %d, res_y: %d\n", RES_X, RES_Y);
+	ft_printf("---------------------------------------\n");
 	ft_printf("north_tx: %s\n", map->north_tx);
 	ft_printf("south_tx: %s\n", map->south_tx);
 	ft_printf("west_tx: %s\n", map->west_tx);
 	ft_printf("east_tx: %s\n", map->east_tx);
-	ft_printf("floor_color: %d\n", map->floor_color);
-	ft_printf("ceiling_color: %d\n", map->ceiling_color);
+	ft_printf("floor_color: %u\n", map->floor_color);
+	ft_printf("ceiling_color: %u\n", map->ceiling_color);
 	ft_printf("height: %d\n", map->height);
+	ft_printf("player_x: %d, player_y: %d\n", map->player_x, map->player_y);
+	ft_printf("p: %c\n", map->p);
 	while (map->map_data[i])
 	{
 		printf("%s\n", map->map_data[i]);
 		i++;
 	}
+	ft_printf("---------------------------------------\n");
 }

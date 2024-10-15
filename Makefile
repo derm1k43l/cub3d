@@ -18,10 +18,15 @@ MLX_FLAGS = ./MLX42/build/libmlx42.a -Iinclude -lglfw -framework Cocoa -framewor
 MLX_INC = -I$(MLX_DIR)
 
 # LIST OF SOURCE FILES
-SRCS = $(SRC_DIR)/main.c $(SRC_DIR)/utils.c $(SRC_DIR)/init.c $(SRC_DIR)/parse.c \
-	$(SRC_DIR)/parse_utils.c $(SRC_DIR)/map.c $(SRC_DIR)/execution.c
+SRCS = $(SRC_DIR)/main.c $(SRC_DIR)/utils.c $(SRC_DIR)/init.c $(SRC_DIR)/parse_txt_col.c \
+	$(SRC_DIR)/parse_utils.c $(SRC_DIR)/parse_map.c $(SRC_DIR)/execution.c $(SRC_DIR)/check_map.c \
+#	$(SRC_DIR)/move.c
 
-OBJS = $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(SRCS))
+# replaces the src directory with the obj directory for the .o files
+ OBJS = $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(SRCS))
+
+# compies the source files to object files in the main directory
+#OBJS = $(SRCS:.c=.o)
 
 # COLORS
 GREEN = \033[0;32m

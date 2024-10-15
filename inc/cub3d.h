@@ -6,7 +6,7 @@
 /*   By: mrusu <mrusu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 16:11:10 by mrusu             #+#    #+#             */
-/*   Updated: 2024/10/08 10:59:16 by mrusu            ###   ########.fr       */
+/*   Updated: 2024/10/14 17:34:46 by mrusu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,14 +34,14 @@
 # define RES_X 1920
 # define RES_Y 1080
 # define FOV 60
-# define DEFAULT_TEXTURE "default.xpm"
-# define DEFAULT_FLOOR (t_color){0, 0, 0}
-# define DEFAULT_CEILING (t_color){0, 0, 0}
+# define ROTATION_SPEED 0.045
+# define PLAYER_SPEED 4
+# define TILE_SIZE 30
 
-# define ROTATION_SPEED 0.045 // rotation speed
-# define PLAYER_SPEED 4 // player speed
-# define TILE_SIZE 30 // tile size
-
+//	error - 4294967295
+//	unset - 4294967294
+# define COLOR_ERROR 0xFFFFFFFF
+# define COLOR_UNSET 0xFFFFFFFE
 
 // Typdef foreward declaration
 typedef struct s_map	t_map;
@@ -54,22 +54,26 @@ typedef struct s_color
 	int	r;
 	int	g;
 	int	b;
+	int	rgb;
 }	t_color;
 
 typedef struct s_map
 {
-	void	*init;
-	void	*win;
-	int		res_x;
-	int		res_y;
-	char	*north_tx;
-	char	*south_tx;
-	char	*west_tx;
-	char	*east_tx;
-	t_color	floor_color;
-	t_color	ceiling_color;
-	char	**map_data;
-	int		height;
+	void		*init;
+	void		*win;
+	int			res_x;
+	int			res_y;
+	char		*north_tx;
+	char		*south_tx;
+	char		*west_tx;
+	char		*east_tx;
+	uint32_t	floor_color;
+	uint32_t	ceiling_color;
+	char		**map_data;
+	int			height;
+	int			player_x;
+	int			player_y;
+	char 		p;
 }	t_map;
 
 typedef struct s_player
@@ -103,33 +107,41 @@ typedef struct s_mlx //the mlx structure
 
 // main.c
 
-// map.c
-void	read_map(char *file_name, t_map *map);
-int		check_map_validity(t_map *map);
-int		check_boundary(char **map_data, int height, int width);
-int		check_player(char **map_data, int height, int width);
+// check_map.c
+int			check_map_validity(t_map *map);
+int			check_boundary(char **map_data, int height, int width);
+int			check_player(char **map_data, int height, int width, t_map *map);
+void		check_texture_and_color(t_map *map);
+void		add_player(t_map *map, int i, int j);
+
+// execution.c
+
+// parse_map.c
+void		read_map(char *file_name, t_map *map);
+int			open_file(char *file_name);
+int			memory_allocation(t_map *map);
+int			parse_map(int fd, t_map *map, char *first_map_line);
+void		store_map_line(t_map *map, char *line);
 
 // utils.c
-void	clean_map(t_map *map);
-void	printerr(char *msg);
-int		ft_is_whitespace(char c);
-void	print_map_data(t_map *map);
+void		clean_map(t_map *map);
+void		printerr(char *msg);
+int			ft_is_whitespace(char c);
+void		print_map_data(t_map *map);
 
 // init.c
-void	init_default(t_map *map);
-
-// parse.c
-char	*parse_texture_and_color(int fd, t_map *map);
-int		parse_texture(char *line, t_map *map);
-int		parse_color(char *line, t_map *map);
-int		parse_color_value(char *line, t_color *color);
-int		parse_map(int fd, t_map *map, char *first_map_line);
+void		init_default(t_map *map);
+void		init_mlx(t_map *map);
 
 // parse_utils.c
-int		open_file(char *file_name);
-char	*skip_empty_line(int fd);
-void	store_map_line(t_map *map, char *line);
-void	memory_allocation(t_map *map);
+char		*trim_whitespace(char *line);
+char		*skip_empty_line(int fd);
+char		*gnl_noemptyline(int fd, t_map *map);
+
+// parse_txt_col.c
+char		*parse_texture_and_color(int fd, t_map *map);
+int			set_values(char *line, t_map *map);
+uint32_t	parse_color(char *line);
 
 // execution
 
